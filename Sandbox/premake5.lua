@@ -13,11 +13,13 @@ project "Sandbox"
 	}
 	
 	includedirs {
-		"%{wks.location}/AtGfx/Include"
+		"%{wks.location}/AtGfx/Include",
+		"%{prj.location}/Vendor/glfw/include"
     }
 
 	links {
-		"AtGfx"
+		"AtGfx",
+		"%{prj.location}/Vendor/glfw/lib-vc2022/glfw3.lib"
 	}
 
 	filter "system:windows"
