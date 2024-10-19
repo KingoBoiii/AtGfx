@@ -1,6 +1,6 @@
 #pragma once
 
-namespace AtomGfx::Internal
+namespace AtGfx::Internal
 {
 
 	class Bindable

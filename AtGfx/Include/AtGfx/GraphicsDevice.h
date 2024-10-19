@@ -1,10 +1,10 @@
 #pragma once
-#include "AtomGfx/GraphicsAPI.h"
-#include "AtomGfx/DebugMessage.h"
+#include "AtGfx/GraphicsAPI.h"
+#include "AtGfx/DebugMessage.h"
 
 #include <cstdint>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	class Pipeline;

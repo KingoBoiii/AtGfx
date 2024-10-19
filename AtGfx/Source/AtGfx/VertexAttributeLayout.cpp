@@ -1,6 +1,6 @@
-#include "AtomGfx/VertexAttributeLayout.h"
+#include "AtGfx/VertexAttributeLayout.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	VertexAttributeLayout::VertexAttributeLayout(std::initializer_list<VertexAttributeElement> elements)

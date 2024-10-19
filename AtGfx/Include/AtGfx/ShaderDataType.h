@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	enum class ShaderDataType

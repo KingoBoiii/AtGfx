@@ -1,19 +1,19 @@
-#include "AtomGfx/Buffer.h"
+#include "AtGfx/Buffer.h"
 
 #include "OpenGL/OpenGLBuffer.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	Buffer* Buffer::Create(GraphicsDevice* graphicsDevice, const BufferSpecification& specification)
 	{
 		switch (graphicsDevice->GetGraphicsAPI())
 		{
-			case AtomGfx::GraphicsAPI::OpenGL:		return new OpenGLBuffer(graphicsDevice, specification);
-			case AtomGfx::GraphicsAPI::Vulkan:
-			case AtomGfx::GraphicsAPI::DirectX11:
-			case AtomGfx::GraphicsAPI::DirectX12:
-			case AtomGfx::GraphicsAPI::None:
+			case AtGfx::GraphicsAPI::OpenGL:		return new OpenGLBuffer(graphicsDevice, specification);
+			case AtGfx::GraphicsAPI::Vulkan:
+			case AtGfx::GraphicsAPI::DirectX11:
+			case AtGfx::GraphicsAPI::DirectX12:
+			case AtGfx::GraphicsAPI::None:
 			default:
 				break;
 		}

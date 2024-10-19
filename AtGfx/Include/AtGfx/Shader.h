@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	class Shader : public Internal::Bindable

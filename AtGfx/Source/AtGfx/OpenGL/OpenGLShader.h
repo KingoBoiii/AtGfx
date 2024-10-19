@@ -1,10 +1,10 @@
 #pragma once
-#include "AtomGfx/Shader.h"
+#include "AtGfx/Shader.h"
 
 #include <unordered_map>
 #include <cstdint>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	class OpenGLShader : public Shader

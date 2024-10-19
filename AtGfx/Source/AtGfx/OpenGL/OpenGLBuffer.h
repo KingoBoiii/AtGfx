@@ -1,7 +1,7 @@
 #pragma once
-#include "AtomGfx/Buffer.h"
+#include "AtGfx/Buffer.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	class OpenGLBuffer : public Buffer

@@ -1,9 +1,9 @@
 #pragma once
 #include "Bindable.h"
-#include "AtomGfx/GraphicsDevice.h"
-#include "AtomGfx/VertexAttributeLayout.h"
+#include "AtGfx/GraphicsDevice.h"
+#include "AtGfx/VertexAttributeLayout.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	struct PipelineSpecification

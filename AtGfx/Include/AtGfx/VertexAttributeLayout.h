@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	struct VertexAttributeElement

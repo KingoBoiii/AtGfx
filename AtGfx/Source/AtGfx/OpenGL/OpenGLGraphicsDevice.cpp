@@ -1,11 +1,11 @@
 #include "OpenGLGraphicsDevice.h"
 
-#include "AtomGfx/Pipeline.h"
-#include "AtomGfx/Buffer.h"
+#include "AtGfx/Pipeline.h"
+#include "AtGfx/Buffer.h"
 
 #include <glad/glad.h>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	AT_GFX_ENSURE_DEBUG_MESSAGE_CALLBACK;
@@ -68,7 +68,7 @@ namespace AtomGfx
 		glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
 		glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
 
-		KE_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "AtomGfx requires at least OpenGL version 4.5!");
+		KE_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "AtGfx requires at least OpenGL version 4.5!");
 #endif
 	}
 

@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	AT_GFX_EXTERN_DEBUG_MESSAGE_CALLBACK;

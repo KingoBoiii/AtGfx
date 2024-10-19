@@ -1,7 +1,7 @@
 #pragma once
-#include "AtomGfx/GraphicsDevice.h"
+#include "AtGfx/GraphicsDevice.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	class OpenGLGraphicsDevice : public GraphicsDevice

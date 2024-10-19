@@ -1,19 +1,19 @@
-#include "AtomGfx/Pipeline.h"
+#include "AtGfx/Pipeline.h"
 
 #include "OpenGL/OpenGLPipeline.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	Pipeline* Pipeline::Create(GraphicsDevice* graphicsDevice, const PipelineSpecification& specification)
 	{
 		switch (graphicsDevice->GetGraphicsAPI())
 		{
-			case AtomGfx::GraphicsAPI::OpenGL:		return new OpenGLPipeline(graphicsDevice, specification);
-			case AtomGfx::GraphicsAPI::Vulkan:
-			case AtomGfx::GraphicsAPI::DirectX11:
-			case AtomGfx::GraphicsAPI::DirectX12:
-			case AtomGfx::GraphicsAPI::None:
+			case AtGfx::GraphicsAPI::OpenGL:		return new OpenGLPipeline(graphicsDevice, specification);
+			case AtGfx::GraphicsAPI::Vulkan:
+			case AtGfx::GraphicsAPI::DirectX11:
+			case AtGfx::GraphicsAPI::DirectX12:
+			case AtGfx::GraphicsAPI::None:
 			default:
 				break;
 		}

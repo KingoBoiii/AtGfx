@@ -1,6 +1,6 @@
 #pragma once
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	enum class GraphicsAPI

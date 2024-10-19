@@ -1,19 +1,19 @@
-#include "AtomGfx/Texture.h"
+#include "AtGfx/Texture.h"
 
 #include "OpenGL/OpenGLTexture.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	Texture* Texture::Create(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath, const TextureSpecification& specification)
 	{
 		switch (graphicsDevice->GetGraphicsAPI())
 		{
-			case AtomGfx::GraphicsAPI::OpenGL:		return new OpenGLTexture(graphicsDevice, filepath, specification);
-			case AtomGfx::GraphicsAPI::Vulkan:
-			case AtomGfx::GraphicsAPI::DirectX11:
-			case AtomGfx::GraphicsAPI::DirectX12:
-			case AtomGfx::GraphicsAPI::None:
+			case AtGfx::GraphicsAPI::OpenGL:		return new OpenGLTexture(graphicsDevice, filepath, specification);
+			case AtGfx::GraphicsAPI::Vulkan:
+			case AtGfx::GraphicsAPI::DirectX11:
+			case AtGfx::GraphicsAPI::DirectX12:
+			case AtGfx::GraphicsAPI::None:
 			default: break;
 		}
 

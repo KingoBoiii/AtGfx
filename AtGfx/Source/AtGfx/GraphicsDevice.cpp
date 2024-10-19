@@ -1,19 +1,19 @@
-#include "AtomGfx/GraphicsDevice.h"
+#include "AtGfx/GraphicsDevice.h"
 
 #include "OpenGL/OpenGLGraphicsDevice.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	GraphicsDevice* GraphicsDevice::Create(GraphicsAPI graphicsAPI, GraphicsDeviceSpecification specification)
 	{
 		switch (graphicsAPI)
 		{
-			case AtomGfx::GraphicsAPI::OpenGL:		return new OpenGLGraphicsDevice(specification);
-			case AtomGfx::GraphicsAPI::Vulkan:
-			case AtomGfx::GraphicsAPI::DirectX11:
-			case AtomGfx::GraphicsAPI::DirectX12:
-			case AtomGfx::GraphicsAPI::None:
+			case AtGfx::GraphicsAPI::OpenGL:		return new OpenGLGraphicsDevice(specification);
+			case AtGfx::GraphicsAPI::Vulkan:
+			case AtGfx::GraphicsAPI::DirectX11:
+			case AtGfx::GraphicsAPI::DirectX12:
+			case AtGfx::GraphicsAPI::None:
 			default: break;
 		}
 

@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <stb_image.h>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	namespace Utils

@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	namespace Utils
@@ -12,9 +12,9 @@ namespace AtomGfx
 		{
 			switch (bufferType)
 			{
-				case AtomGfx::BufferType::VertexBuffer:		return GL_ARRAY_BUFFER;
-				case AtomGfx::BufferType::IndexBuffer:		return GL_ELEMENT_ARRAY_BUFFER;
-				case AtomGfx::BufferType::None:
+				case AtGfx::BufferType::VertexBuffer:		return GL_ARRAY_BUFFER;
+				case AtGfx::BufferType::IndexBuffer:		return GL_ELEMENT_ARRAY_BUFFER;
+				case AtGfx::BufferType::None:
 				default: break;
 			}
 
@@ -25,16 +25,16 @@ namespace AtomGfx
 		{
 			switch (bufferUsage)
 			{
-				case AtomGfx::BufferUsage::StreamDraw:		return GL_STREAM_DRAW;
-				case AtomGfx::BufferUsage::StreamRead:		return GL_STREAM_READ;
-				case AtomGfx::BufferUsage::StreamCopy:		return GL_STREAM_COPY;
-				case AtomGfx::BufferUsage::StaticDraw:		return GL_STATIC_DRAW;
-				case AtomGfx::BufferUsage::StaticRead:		return GL_STATIC_READ;
-				case AtomGfx::BufferUsage::StaticCopy:		return GL_STATIC_COPY;
-				case AtomGfx::BufferUsage::DynamicDraw:		return GL_DYNAMIC_DRAW;
-				case AtomGfx::BufferUsage::DynamicRead:		return GL_DYNAMIC_READ;
-				case AtomGfx::BufferUsage::DynamicCopy:		return GL_DYNAMIC_COPY;
-				case AtomGfx::BufferUsage::None:
+				case AtGfx::BufferUsage::StreamDraw:		return GL_STREAM_DRAW;
+				case AtGfx::BufferUsage::StreamRead:		return GL_STREAM_READ;
+				case AtGfx::BufferUsage::StreamCopy:		return GL_STREAM_COPY;
+				case AtGfx::BufferUsage::StaticDraw:		return GL_STATIC_DRAW;
+				case AtGfx::BufferUsage::StaticRead:		return GL_STATIC_READ;
+				case AtGfx::BufferUsage::StaticCopy:		return GL_STATIC_COPY;
+				case AtGfx::BufferUsage::DynamicDraw:		return GL_DYNAMIC_DRAW;
+				case AtGfx::BufferUsage::DynamicRead:		return GL_DYNAMIC_READ;
+				case AtGfx::BufferUsage::DynamicCopy:		return GL_DYNAMIC_COPY;
+				case AtGfx::BufferUsage::None:
 				default: break;
 			}
 

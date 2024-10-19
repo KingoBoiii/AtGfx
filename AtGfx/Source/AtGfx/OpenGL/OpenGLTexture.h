@@ -1,7 +1,7 @@
 #pragma once
-#include "AtomGfx/Texture.h"
+#include "AtGfx/Texture.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	class OpenGLTexture : public Texture

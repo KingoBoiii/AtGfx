@@ -1,7 +1,7 @@
 #pragma once
-#include "AtomGfx/Pipeline.h"
+#include "AtGfx/Pipeline.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	class OpenGLPipeline : public Pipeline

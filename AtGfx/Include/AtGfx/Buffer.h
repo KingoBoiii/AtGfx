@@ -1,9 +1,9 @@
 #pragma once
-#include "AtomGfx/GraphicsDevice.h"
+#include "AtGfx/GraphicsDevice.h"
 
 #include "Bindable.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	enum class BufferType

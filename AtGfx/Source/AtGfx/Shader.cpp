@@ -1,19 +1,19 @@
-#include "AtomGfx/Shader.h"
+#include "AtGfx/Shader.h"
 
 #include "OpenGL/OpenGLShader.h"
 
-namespace AtomGfx
+namespace AtGfx
 {
 
 	Shader* Shader::Create(GraphicsDevice* graphicsDevice, const std::string& filepath)
 	{
 		switch (graphicsDevice->GetGraphicsAPI())
 		{
-			case AtomGfx::GraphicsAPI::OpenGL:		return new OpenGLShader(graphicsDevice, filepath);
-			case AtomGfx::GraphicsAPI::Vulkan:
-			case AtomGfx::GraphicsAPI::DirectX11:
-			case AtomGfx::GraphicsAPI::DirectX12:
-			case AtomGfx::GraphicsAPI::None:
+			case AtGfx::GraphicsAPI::OpenGL:		return new OpenGLShader(graphicsDevice, filepath);
+			case AtGfx::GraphicsAPI::Vulkan:
+			case AtGfx::GraphicsAPI::DirectX11:
+			case AtGfx::GraphicsAPI::DirectX12:
+			case AtGfx::GraphicsAPI::None:
 			default:
 				break;
 		}
@@ -25,11 +25,11 @@ namespace AtomGfx
 	{
 		switch (graphicsDevice->GetGraphicsAPI())
 		{
-			case AtomGfx::GraphicsAPI::OpenGL:		return new OpenGLShader(graphicsDevice, filepath, name);
-			case AtomGfx::GraphicsAPI::Vulkan:
-			case AtomGfx::GraphicsAPI::DirectX11:
-			case AtomGfx::GraphicsAPI::DirectX12:
-			case AtomGfx::GraphicsAPI::None:
+			case AtGfx::GraphicsAPI::OpenGL:		return new OpenGLShader(graphicsDevice, filepath, name);
+			case AtGfx::GraphicsAPI::Vulkan:
+			case AtGfx::GraphicsAPI::DirectX11:
+			case AtGfx::GraphicsAPI::DirectX12:
+			case AtGfx::GraphicsAPI::None:
 			default:
 				break;
 		}
