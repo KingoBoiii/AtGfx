@@ -1,4 +1,7 @@
 #include <GLFW/glfw3.h>
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 #include <AtGfx/GraphicsDevice.h>
 #include <AtGfx/Shader.h>
@@ -31,6 +34,12 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    ImGui::CreateContext();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init();
+
+    ImGui::StyleColorsDark();
+
     AtGfx::GraphicsDevice* graphicsDevice = AtGfx::GraphicsDevice::Create(AtGfx::GraphicsAPI::OpenGL, {
         .GLGetAddressProc = (void* (*)(const char* name))glfwGetProcAddress,
         .MessageCallback = AtGfxMessageCallback
@@ -57,6 +66,15 @@ int main(void)
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        ImGui::ShowDemoWindow();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
         graphicsDevice->Draw(pipeline, vertexBuffer);
 
         /* Swap front and back buffers */
@@ -65,6 +83,10 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
     }
+
+    ImGui_ImplGlfw_Shutdown();
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui::DestroyContext();
 
     glfwTerminate();
     return 0;

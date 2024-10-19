@@ -9,12 +9,18 @@ project "Sandbox"
 
 	files {
 		"Source/**.cpp",
-		"Source/**.h"
+		"Source/**.h",
+		"%{prj.location}/Vendor/glad/src/**.c",
+		"%{prj.location}/Vendor/glad/include/**.h",
+		"%{prj.location}/Vendor/imgui/**.h",
+		"%{prj.location}/Vendor/imgui/**.cpp"
 	}
 	
 	includedirs {
 		"%{wks.location}/AtGfx/Include",
-		"%{prj.location}/Vendor/glfw/include"
+		"%{prj.location}/Vendor/glfw/include",
+		"%{prj.location}/Vendor/glad/include",
+		"%{prj.location}/Vendor/imgui"
     }
 
 	links {
