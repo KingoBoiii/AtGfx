@@ -18,10 +18,13 @@ project "AtGfx"
 	}
     
     includedirs {
-		"Include"
+		"Include",
+		"%{IncludeDir.glad}",
+		"%{IncludeDir.stb_image}"
     }
 
     links {
+		"glad",
         "opengl32.lib"
     }
 
