@@ -1,0 +1,21 @@
+!Vendor/premake/
+
+# Binaries
+**/bin/
+bin-int/
+Intermediates/
+
+# Atom files
+*.log
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj
+
+# Directories
+scripts/__pycache__
+/Atomic/MonoDebugger.txt
