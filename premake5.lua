@@ -20,10 +20,6 @@ IncludeDir['stb_image'] = "%{wks.location}/AtGfx/Vendor/stb_image";
 LibraryDir = {}
 Library = {}
 
-group "Dependencies" 
-	include "AtGfx/Vendor/glad"
-group ""
-
 include "AtGfx"
 include "Sandbox"
 

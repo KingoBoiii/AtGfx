@@ -13,18 +13,24 @@ project "AtGfx"
 		"Source/**.h",
 		"Source/**.hpp",
 		"Source/**.cpp",
-		"Vendor/stb_image/**.h",
-		"Vendor/stb_image/**.cpp"
+		
+		-- glad (OpenGL extension)
+		"%{prj.location}/Vendor/glad/include/glad/glad.h",
+		"%{prj.location}/Vendor/glad/include/KHR/khrplatform.h",
+		"%{prj.location}/Vendor/glad/src/glad.c",
+		
+		-- stb-image
+		"%{prj.location}/Vendor/stb_image/**.h",
+		"%{prj.location}/Vendor/stb_image/**.cpp"
 	}
     
     includedirs {
 		"Include",
-		"%{IncludeDir.glad}",
-		"%{IncludeDir.stb_image}"
+		"%{prj.location}/Vendor/glad/include",
+		"%{prj.location}/Vendor/stb_image"
     }
 
     links {
-		"glad",
         "opengl32.lib"
     }
 
