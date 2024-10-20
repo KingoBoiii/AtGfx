@@ -10,84 +10,110 @@
 
 #include <stdio.h>
 
+#include "Test/ClearColorTest.h"
+#include "Test/LearnOpenGL/HelloWindowTest.h"
+#include "Test/LearnOpenGL/HelloTriangleP1.h"
+
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
-    printf("%s\n", message);
+	printf("%s\n", message);
+}
+
+void RenderImGuiMenu()
+{
+	if (ImGui::Begin("Tests"))
+	{
+	}
+	ImGui::End();
 }
 
 int main(void)
 {
-    GLFWwindow* window;
+	GLFWwindow* window;
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
+	/* Initialize the library */
+	if (!glfwInit())
+		return -1;
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
+	/* Create a windowed mode window and its OpenGL context */
+	window = glfwCreateWindow(1366, 768, "Hello World", NULL, NULL);
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+	}
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+	/* Make the window's context current */
+	glfwMakeContextCurrent(window);
 
-    ImGui::CreateContext();
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init();
+	ImGui::CreateContext();
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	ImGui_ImplOpenGL3_Init();
 
-    ImGui::StyleColorsDark();
+	ImGui::StyleColorsDark();
 
-    AtGfx::GraphicsDevice* graphicsDevice = AtGfx::GraphicsDevice::Create(AtGfx::GraphicsAPI::OpenGL, {
-        .GLGetAddressProc = (void* (*)(const char* name))glfwGetProcAddress,
-        .MessageCallback = AtGfxMessageCallback
-        });
-    graphicsDevice->Initialize();
+	AtGfx::GraphicsDevice* graphicsDevice = AtGfx::GraphicsDevice::Create(AtGfx::GraphicsAPI::OpenGL, {
+		.GLGetAddressProc = (void* (*)(const char* name))glfwGetProcAddress,
+		.MessageCallback = AtGfxMessageCallback
+		});
+	graphicsDevice->Initialize();
 
-    AtGfx::Pipeline* pipeline = AtGfx::Pipeline::Create(graphicsDevice, {
-        .VertexAttributeLayout = {
-            { AtGfx::ShaderDataType::Float3, "POSITION" }
-        }
-    });
+	//Test* currentTest = new ClearColorTest(graphicsDevice);
+	//Test* currentTest = new LearnOpenGL::HelloWindowTest(graphicsDevice);
+	Test* currentTest = new LearnOpenGL::HelloTriangleP1(graphicsDevice);
 
-    float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
-    };
+	currentTest->Initialize();
 
-    AtGfx::Buffer* vertexBuffer = AtGfx::Buffer::Create(graphicsDevice, AtGfx::BufferSpecification::CreateVertexBufferSpecification(sizeof(vertices), AtGfx::BufferUsage::StaticDraw, vertices));
+	//AtGfx::Pipeline* pipeline = AtGfx::Pipeline::Create(graphicsDevice, {
+	//    .VertexAttributeLayout = {
+	//        { AtGfx::ShaderDataType::Float3, "POSITION" }
+	//    }
+	//});
 
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+	//float vertices[] = {
+	//    -0.5f, -0.5f, 0.0f,
+	//     0.5f, -0.5f, 0.0f,
+	//     0.0f,  0.5f, 0.0f
+	//};
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+	//AtGfx::Buffer* vertexBuffer = AtGfx::Buffer::Create(graphicsDevice, AtGfx::BufferSpecification::CreateVertexBufferSpecification(sizeof(vertices), AtGfx::BufferUsage::StaticDraw, vertices));
 
-        ImGui::ShowDemoWindow();
+	/* Loop until the user closes the window */
+	while (!glfwWindowShouldClose(window))
+	{
+		/* Render here */
+		// should the test be responsible for clearing?
+		//glClear(GL_COLOR_BUFFER_BIT);
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		currentTest->Perform();
 
-        graphicsDevice->Draw(pipeline, vertexBuffer);
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+		RenderImGuiMenu();
+		currentTest->ImGuiRender();
 
-        /* Poll for and process events */
-        glfwPollEvents();
-    }
+		ImGui::ShowDemoWindow();
 
-    ImGui_ImplGlfw_Shutdown();
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui::DestroyContext();
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-    glfwTerminate();
-    return 0;
+		//graphicsDevice->Draw(pipeline, vertexBuffer);
+
+		/* Swap front and back buffers */
+		glfwSwapBuffers(window);
+
+		/* Poll for and process events */
+		glfwPollEvents();
+	}
+
+	currentTest->Deinitialize();
+
+	ImGui_ImplGlfw_Shutdown();
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui::DestroyContext();
+
+	glfwTerminate();
+	return 0;
 }
