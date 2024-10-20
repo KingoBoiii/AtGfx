@@ -76,6 +76,12 @@ namespace AtGfx
 	{
 	}
 
+	void OpenGLGraphicsDevice::Clear(float r, float g, float b, float a) const
+	{
+		glClearColor(r, g, b, a);
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
 	void OpenGLGraphicsDevice::Draw(Pipeline* pipeline, Buffer* vertexBuffer, uint32_t vertexCount) const
 	{
 		if (!vertexBuffer->IsBufferType(BufferType::VertexBuffer))

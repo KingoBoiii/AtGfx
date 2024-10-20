@@ -13,6 +13,7 @@ namespace AtGfx
 		virtual void Initialize() override;
 		virtual void Deinitialize() override;
 
+		virtual void Clear(float r, float g, float b, float a = 1.0f) const override;
 		virtual void Draw(Pipeline* pipeline, Buffer* vertexBuffer, uint32_t vertexCount = 0) const override;
 		virtual void DrawIndexed(Pipeline* pipeline, Buffer* vertexBuffer, Buffer* indexBuffer, uint32_t indexCount = 0) const override;
 	};
