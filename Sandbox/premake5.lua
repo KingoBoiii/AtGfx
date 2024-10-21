@@ -22,6 +22,7 @@ project "Sandbox"
 	}
 	
 	includedirs {
+		"Source",
 		"%{wks.location}/AtGfx/Include",
 		"%{prj.location}/Vendor/glfw/include",
 		"%{prj.location}/Vendor/glad/include",
