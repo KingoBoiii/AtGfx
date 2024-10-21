@@ -21,7 +21,6 @@ namespace LearnOpenGL
 		AtGfx::Shader* m_Shader = nullptr;
 		AtGfx::Pipeline* m_Pipeline = nullptr;
 		AtGfx::Buffer* m_VertexBuffer = nullptr;
-		AtGfx::Buffer* m_IndexBuffer = nullptr;
 	};
 
 }
