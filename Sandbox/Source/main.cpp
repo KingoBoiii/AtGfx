@@ -83,7 +83,7 @@ int main(void)
 	{
 		/* Render here */
 		// should the test be responsible for clearing?
-		//glClear(GL_COLOR_BUFFER_BIT);
+		graphicsDevice->Clear(1.0f, 1.0f, 1.0f, 1.0f);
 
 		if (currentTest)
 		{
