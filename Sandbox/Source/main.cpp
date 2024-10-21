@@ -17,6 +17,8 @@
 #include "Test/LearnOpenGL/GettingStarted/HelloTriangleP2_IBO.h"
 #include "Test/LearnOpenGL/GettingStarted/ShadersP1_Uniforms.h"
 #include "Test/LearnOpenGL/GettingStarted/ShadersP2_MoreAttributes.h"
+#include "Test/LearnOpenGL/GettingStarted/TexturesP1_Container.h"
+#include "Test/LearnOpenGL/GettingStarted/TexturesP2_TextureUnits.h"
 
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
@@ -30,6 +32,10 @@ int main(void)
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
+
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(1600, 900, "Hello World", NULL, NULL);
@@ -73,6 +79,8 @@ int main(void)
 		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP2_IBO>(learnOpenGLCategory, "Hello Triangle (P2 - IBO/EBO)");
 		testMenu.RegisterTest<LearnOpenGL::ShadersP1_Uniforms>(learnOpenGLCategory, "Shaders (P1 - Uniforms)");
 		testMenu.RegisterTest<LearnOpenGL::ShadersP2_MoreAttributes>(learnOpenGLCategory, "Shaders (P2 - More Attributes)");
+		testMenu.RegisterTest<LearnOpenGL::TexturesP1_Container>(learnOpenGLCategory, "Textures (P1 - Wooden Container)");
+		testMenu.RegisterTest<LearnOpenGL::TexturesP2_TextureUnits>(learnOpenGLCategory, "Textures (P2 - Texture Units)");
 	}
 
 	/* Loop until the user closes the window */
