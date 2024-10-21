@@ -16,6 +16,7 @@
 #include "Test/LearnOpenGL/HelloTriangleP1_VBO.h"
 #include "Test/LearnOpenGL/HelloTriangleP2_IBO.h"
 #include "Test/LearnOpenGL/ShadersP1_Uniforms.h"
+#include "Test/LearnOpenGL/ShadersP2_MoreAttributes.h"
 
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
@@ -71,6 +72,7 @@ int main(void)
 		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP1_VBO>(learnOpenGLCategory, "Hello Triangle (P1 - VBO)");
 		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP2_IBO>(learnOpenGLCategory, "Hello Triangle (P2 - IBO/EBO)");
 		testMenu.RegisterTest<LearnOpenGL::ShadersP1_Uniforms>(learnOpenGLCategory, "Shaders (P1 - Uniforms)");
+		testMenu.RegisterTest<LearnOpenGL::ShadersP2_MoreAttributes>(learnOpenGLCategory, "Shaders (P2 - More Attributes)");
 	}
 
 	/* Loop until the user closes the window */
