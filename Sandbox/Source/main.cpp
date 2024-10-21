@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 
-#include "Test/ClearColorTest.h"
+#include "Test/TestMenu.h"
 #include "Test/Tests/ClearColorTest.h"
 #include "Test/LearnOpenGL/HelloWindowTest.h"
 #include "Test/LearnOpenGL/HelloTriangleP1.h"
@@ -63,25 +63,20 @@ int main(void)
 		});
 	graphicsDevice->Initialize();
 
-	//Test* currentTest = new ClearColorTest(graphicsDevice);
-	//Test* currentTest = new LearnOpenGL::HelloWindowTest(graphicsDevice);
-	Test* currentTest = new LearnOpenGL::HelloTriangleP1(graphicsDevice);
+	Test* currentTest = nullptr;
+	TestMenu testMenu(graphicsDevice, currentTest);
 
-	currentTest->Initialize();
+	{
+		std::string testsCategory = testMenu.RegisterCategory("Tests");
+		testMenu.RegisterTest<Tests::ClearColorTest>(testsCategory, "Clear Color");
+	}
 
-	//AtGfx::Pipeline* pipeline = AtGfx::Pipeline::Create(graphicsDevice, {
-	//    .VertexAttributeLayout = {
-	//        { AtGfx::ShaderDataType::Float3, "POSITION" }
-	//    }
-	//});
-
-	//float vertices[] = {
-	//    -0.5f, -0.5f, 0.0f,
-	//     0.5f, -0.5f, 0.0f,
-	//     0.0f,  0.5f, 0.0f
-	//};
-
-	//AtGfx::Buffer* vertexBuffer = AtGfx::Buffer::Create(graphicsDevice, AtGfx::BufferSpecification::CreateVertexBufferSpecification(sizeof(vertices), AtGfx::BufferUsage::StaticDraw, vertices));
+	{
+		std::string learnOpenGLCategory = testMenu.RegisterCategory("LearnOpenGL");
+		testMenu.RegisterTest<LearnOpenGL::HelloWindowTest>(learnOpenGLCategory, "Hello Window (Clear Color)");
+		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP1>(learnOpenGLCategory, "Hello Triangle (P1)");
+		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP2>(learnOpenGLCategory, "Hello Triangle (P2)");
+	}
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -90,14 +85,16 @@ int main(void)
 		// should the test be responsible for clearing?
 		//glClear(GL_COLOR_BUFFER_BIT);
 
+		if (currentTest)
+		{
 		currentTest->Perform();
+		}
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		RenderImGuiMenu();
-		currentTest->ImGuiRender();
+		testMenu.ImGuiRender();
 
 		ImGui::ShowDemoWindow();
 
@@ -113,7 +110,10 @@ int main(void)
 		glfwPollEvents();
 	}
 
+	if (currentTest != nullptr)
+	{
 	currentTest->Deinitialize();
+	}
 
 	ImGui_ImplGlfw_Shutdown();
 	ImGui_ImplOpenGL3_Shutdown();
@@ -122,3 +122,4 @@ int main(void)
 	glfwTerminate();
 	return 0;
 }
+

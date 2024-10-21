@@ -1,14 +1,80 @@
 #include "TestMenu.h"
 
-TestMenu::TestMenu(Test*& test)
-	: m_CurrentTest(test)
-{
-}
+#include <imgui.h>
 
-TestMenu::~TestMenu()
+TestMenu::TestMenu(AtGfx::GraphicsDevice* graphicsDevice, Test*& currentTest)
+	: m_GraphicsDevice(graphicsDevice), m_CurrentTest(currentTest)
 {
 }
 
 void TestMenu::ImGuiRender()
 {
+	if (ImGui::Begin("Tests"))
+	{
+		for (const auto& [category, testRegistrations] : m_Tests)
+		{
+			if (ImGui::TreeNodeEx(category.c_str(), ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_DefaultOpen))
+			{
+				for (auto& testRegistration : testRegistrations)
+				{
+					ImGui::TreeNodeEx(testRegistration.Label.c_str(), ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Leaf);
+					if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
+					{
+						if (m_CurrentTest != nullptr)
+						{
+							m_CurrentTest->Deinitialize();
+							delete m_CurrentTest;
+							m_CurrentTest = nullptr;
+						}
+
+						m_CurrentTest = testRegistration.InstantiateTest();
+						m_CurrentTest->Initialize();
+					}
+					ImGui::TreePop();
+
+#if 0
+					if (ImGui::Button(testRegistration.Label.c_str()))
+					{
+						if (m_CurrentTest != nullptr)
+						{
+							m_CurrentTest->Deinitialize();
+							delete m_CurrentTest;
+							m_CurrentTest = nullptr;
+						}
+
+						m_CurrentTest = testRegistration.InstantiateTest();
+						m_CurrentTest->Initialize();
+					}
+#endif
+				}
+				ImGui::TreePop();
+			}
+		}
+
+		//for (auto& testRegistration : m_Tests)
+		//{
+		//	if (ImGui::Button(testRegistration.Label.c_str()))
+		//	{
+		//		if (m_CurrentTest != nullptr)
+		//		{
+		//			m_CurrentTest->Deinitialize();
+		//			delete m_CurrentTest;
+		//			m_CurrentTest = nullptr;
+		//		}
+
+		//		m_CurrentTest = testRegistration.InstantiateTest();
+		//		m_CurrentTest->Initialize();
+		//	}
+		//}
+	}
+	ImGui::End();
+
+	if (m_CurrentTest != nullptr)
+	{
+		if (ImGui::Begin("Test..."))
+		{
+			m_CurrentTest->ImGuiRender();
+		}
+		ImGui::End();
+	}
 }
