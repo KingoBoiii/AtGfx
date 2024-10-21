@@ -1,10 +1,10 @@
 #pragma once
-#include "../ClearColorTest.h"
+#include "../Tests/ClearColorTest.h"
 
 namespace LearnOpenGL
 {
 
-	class HelloWindowTest : public ClearColorTest
+	class HelloWindowTest : public Tests::ClearColorTest
 	{
 	public:
 		HelloWindowTest(AtGfx::GraphicsDevice* graphicsDevice);

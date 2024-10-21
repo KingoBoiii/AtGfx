@@ -11,6 +11,7 @@
 #include <stdio.h>
 
 #include "Test/ClearColorTest.h"
+#include "Test/Tests/ClearColorTest.h"
 #include "Test/LearnOpenGL/HelloWindowTest.h"
 #include "Test/LearnOpenGL/HelloTriangleP1.h"
 
