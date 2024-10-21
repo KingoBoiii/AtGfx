@@ -18,6 +18,7 @@ namespace AtGfx
 		virtual ~Shader() = default;
 	public:
 		virtual void SetInt(const std::string& name, int32_t value) const = 0;
+		virtual void SetVec4(const std::string& name, float v0, float v1, float v2, float v3) const = 0;
 		virtual void SetMat4(const std::string& name, const float* matrix) const = 0;
 	protected:
 		Shader(GraphicsDevice* graphicsDevice, const std::string& filepath);

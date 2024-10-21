@@ -46,6 +46,19 @@ namespace AtGfx
 		glUniform1i(location, value);
 	}
 
+	void OpenGLShader::SetVec4(const std::string& name, float v0, float v1, float v2, float v3) const
+	{
+		auto it = m_UniformLocations.find(name);
+		if (it == m_UniformLocations.end())
+		{
+			AT_GFX_WARN("Uniform name '{}' does not exist on Shader", name);
+			return;
+		}
+
+		int32_t location = it->second;
+		glUniform4f(location, v0, v1, v2, v3);
+	}
+
 	void OpenGLShader::SetMat4(const std::string& name, const float* matrix) const
 	{
 		auto it = m_UniformLocations.find(name);

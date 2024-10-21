@@ -16,6 +16,7 @@ namespace AtGfx
 		virtual ~OpenGLShader();
 	public:
 		virtual void SetInt(const std::string& name, int32_t value) const override;
+		virtual void SetVec4(const std::string& name, float v0, float v1, float v2, float v3) const override;
 		virtual void SetMat4(const std::string& name, const float* matrix) const override;
 
 		virtual void Bind() const override;
