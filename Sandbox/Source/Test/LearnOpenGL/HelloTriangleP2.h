@@ -1,6 +1,7 @@
 #pragma once
 #include "LearnOpenGLTest.h"
 
+#include <AtGfx/Shader.h>
 #include <AtGfx/Pipeline.h>
 #include <AtGfx/Buffer.h>
 
@@ -17,6 +18,7 @@ namespace LearnOpenGL
 		virtual void Deinitialize() override;
 		virtual void Perform() override;
 	private:
+		AtGfx::Shader* m_Shader = nullptr;
 		AtGfx::Pipeline* m_Pipeline = nullptr;
 		AtGfx::Buffer* m_VertexBuffer = nullptr;
 		AtGfx::Buffer* m_IndexBuffer = nullptr;

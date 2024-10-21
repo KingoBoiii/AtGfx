@@ -10,6 +10,22 @@ namespace LearnOpenGL
 
 	void HelloTriangleP1::Initialize()
 	{
+		const char* vertexShaderSource = R"(#version 330 core
+layout (location=0) in vec3 aPos;
+
+void main() {
+	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+})";
+
+		const char* fragmentShaderSource = R"(#version 330 core
+out vec4 FragColor;
+
+void main()
+{
+    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+} )";
+		m_Shader = AtGfx::Shader::Create(m_GraphicsDevice, vertexShaderSource, fragmentShaderSource, "HelloTriangle");
+
 		m_Pipeline = AtGfx::Pipeline::Create(m_GraphicsDevice, {
 		    .VertexAttributeLayout = {
 		        { AtGfx::ShaderDataType::Float3, "POSITION" }
@@ -35,6 +51,7 @@ namespace LearnOpenGL
 	{
 		Clear();
 
+		m_Shader->Bind();
 		m_GraphicsDevice->Draw(m_Pipeline, m_VertexBuffer);
 	}
 
