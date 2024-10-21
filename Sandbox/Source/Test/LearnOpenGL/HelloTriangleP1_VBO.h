@@ -8,11 +8,11 @@
 namespace LearnOpenGL
 {
 
-	class HelloTriangleP1 : public LearnOpenGLTest
+	class HelloTriangleP1_VBO : public LearnOpenGLTest
 	{
 	public:
-		HelloTriangleP1(AtGfx::GraphicsDevice* graphicsDevice);
-		virtual ~HelloTriangleP1() = default;
+		HelloTriangleP1_VBO(AtGfx::GraphicsDevice* graphicsDevice);
+		virtual ~HelloTriangleP1_VBO() = default;
 	public:
 		virtual void Initialize() override;
 		virtual void Deinitialize() override;

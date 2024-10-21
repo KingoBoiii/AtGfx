@@ -3,12 +3,12 @@
 namespace LearnOpenGL
 {
 
-	HelloTriangleP2::HelloTriangleP2(AtGfx::GraphicsDevice* graphicsDevice)
+	HelloTriangleP2_IBO::HelloTriangleP2_IBO(AtGfx::GraphicsDevice* graphicsDevice)
 		: LearnOpenGLTest(graphicsDevice)
 	{
 	}
 
-	void HelloTriangleP2::Initialize()
+	void HelloTriangleP2_IBO::Initialize()
 	{
 		const char* vertexShaderSource = R"(#version 330 core
 layout (location=0) in vec3 aPos;
@@ -48,14 +48,14 @@ void main()
 		m_IndexBuffer = AtGfx::Buffer::Create(m_GraphicsDevice, AtGfx::BufferSpecification::CreateIndexBufferSpecification(sizeof(indices), AtGfx::BufferUsage::StaticDraw, indices));
 	}
 
-	void HelloTriangleP2::Deinitialize()
+	void HelloTriangleP2_IBO::Deinitialize()
 	{
 		delete m_IndexBuffer;
 		delete m_VertexBuffer;
 		delete m_Pipeline;
 	}
 
-	void HelloTriangleP2::Perform()
+	void HelloTriangleP2_IBO::Perform()
 	{
 		Clear();
 
