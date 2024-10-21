@@ -13,6 +13,7 @@ namespace AtGfx
 	public:
 		static Shader* Create(GraphicsDevice* graphicsDevice, const std::string& filepath);
 		static Shader* Create(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name);
+		static Shader* Create(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name);
 	public:
 		virtual ~Shader() = default;
 	public:
@@ -21,6 +22,7 @@ namespace AtGfx
 	protected:
 		Shader(GraphicsDevice* graphicsDevice, const std::string& filepath);
 		Shader(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name);
+		Shader(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name);
 	protected:
 		std::string ReadFile(const std::string& filepath);
 		std::vector<std::string> GetLines(const std::string& source);

@@ -37,6 +37,22 @@ namespace AtGfx
 		return nullptr;
 	}
 
+	Shader* Shader::Create(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name)
+	{
+		switch (graphicsDevice->GetGraphicsAPI())
+		{
+			case AtGfx::GraphicsAPI::OpenGL:		return new OpenGLShader(graphicsDevice, vertexShaderSource, fragmentShaderSource, name);
+			case AtGfx::GraphicsAPI::Vulkan:
+			case AtGfx::GraphicsAPI::DirectX11:
+			case AtGfx::GraphicsAPI::DirectX12:
+			case AtGfx::GraphicsAPI::None:
+			default:
+				break;
+		}
+
+		return nullptr;
+	}
+
 	Shader::Shader(GraphicsDevice* graphicsDevice, const std::string& filepath)
 		: m_GraphicsDevice(graphicsDevice), m_FilePath(filepath)
 	{
@@ -45,6 +61,11 @@ namespace AtGfx
 
 	Shader::Shader(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name)
 		: m_GraphicsDevice(graphicsDevice), m_FilePath(filepath), m_Name(name)
+	{
+	}
+
+	Shader::Shader(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name)
+		: m_GraphicsDevice(graphicsDevice), m_Name(name)
 	{
 	}
 

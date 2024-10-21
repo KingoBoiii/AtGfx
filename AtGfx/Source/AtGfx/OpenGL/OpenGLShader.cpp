@@ -19,6 +19,15 @@ namespace AtGfx
 		CreateShaderProgram();
 	}
 
+	OpenGLShader::OpenGLShader(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name)
+		: Shader(graphicsDevice, vertexShaderSource, fragmentShaderSource, name)
+	{
+		m_VertexSource = vertexShaderSource;
+		m_FragmentSource = fragmentShaderSource;
+
+		CreateShaderProgram(false);
+	}
+
 	OpenGLShader::~OpenGLShader()
 	{
 		DeleteShaderProgram();
@@ -101,11 +110,14 @@ namespace AtGfx
 		return program;
 	}
 
-	void OpenGLShader::CreateShaderProgram()
+	void OpenGLShader::CreateShaderProgram(bool preProcess)
 	{
-		std::string shaderFileContent = ReadFile(m_FilePath);
-		std::string* shaderSources[2] = { &m_VertexSource, &m_FragmentSource };
-		PreProcess(shaderFileContent, shaderSources);
+		if (preProcess)
+		{
+			std::string shaderFileContent = ReadFile(m_FilePath);
+			std::string* shaderSources[2] = { &m_VertexSource, &m_FragmentSource };
+			PreProcess(shaderFileContent, shaderSources);
+		}
 
 		uint32_t vertexShader = CreateShader(m_VertexSource.c_str(), GL_VERTEX_SHADER);
 		uint32_t fragmentShader = CreateShader(m_FragmentSource.c_str(), GL_FRAGMENT_SHADER);
@@ -137,7 +149,7 @@ namespace AtGfx
 			int32_t location = glGetUniformLocation(m_RendererId, name);
 			m_UniformLocations[name] = location;
 		}
-		
+
 		AT_GFX_INFO("Shader loaded with {} active uniforms", activeUniformCount);
 	}
 
