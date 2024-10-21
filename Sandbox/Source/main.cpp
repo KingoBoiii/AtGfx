@@ -67,8 +67,8 @@ int main(void)
 	{
 		std::string learnOpenGLCategory = testMenu.RegisterCategory("LearnOpenGL");
 		testMenu.RegisterTest<LearnOpenGL::HelloWindowTest>(learnOpenGLCategory, "Hello Window (Clear Color)");
-		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP1>(learnOpenGLCategory, "Hello Triangle (P1)");
-		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP2>(learnOpenGLCategory, "Hello Triangle (P2)");
+		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP1>(learnOpenGLCategory, "Hello Triangle (P1 - VBO)");
+		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP2>(learnOpenGLCategory, "Hello Triangle (P2 - IBO/EBO)");
 	}
 
 	/* Loop until the user closes the window */
