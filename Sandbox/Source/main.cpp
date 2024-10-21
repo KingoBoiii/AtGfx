@@ -14,18 +14,11 @@
 #include "Test/Tests/ClearColorTest.h"
 #include "Test/LearnOpenGL/HelloWindowTest.h"
 #include "Test/LearnOpenGL/HelloTriangleP1.h"
+#include "Test/LearnOpenGL/HelloTriangleP2.h"
 
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
 	printf("%s\n", message);
-}
-
-void RenderImGuiMenu()
-{
-	if (ImGui::Begin("Tests"))
-	{
-	}
-	ImGui::End();
 }
 
 int main(void)
@@ -87,7 +80,7 @@ int main(void)
 
 		if (currentTest)
 		{
-		currentTest->Perform();
+			currentTest->Perform();
 		}
 
 		ImGui_ImplOpenGL3_NewFrame();
@@ -101,8 +94,6 @@ int main(void)
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		//graphicsDevice->Draw(pipeline, vertexBuffer);
-
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
 
@@ -112,7 +103,7 @@ int main(void)
 
 	if (currentTest != nullptr)
 	{
-	currentTest->Deinitialize();
+		currentTest->Deinitialize();
 	}
 
 	ImGui_ImplGlfw_Shutdown();
