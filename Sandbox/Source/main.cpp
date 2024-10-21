@@ -19,6 +19,7 @@
 #include "Test/LearnOpenGL/GettingStarted/ShadersP2_MoreAttributes.h"
 #include "Test/LearnOpenGL/GettingStarted/TexturesP1_Container.h"
 #include "Test/LearnOpenGL/GettingStarted/TexturesP2_TextureUnits.h"
+#include "Test/LearnOpenGL/GettingStarted/Transformations.h"
 
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
@@ -81,6 +82,7 @@ int main(void)
 		testMenu.RegisterTest<LearnOpenGL::ShadersP2_MoreAttributes>(learnOpenGLCategory, "Shaders (P2 - More Attributes)");
 		testMenu.RegisterTest<LearnOpenGL::TexturesP1_Container>(learnOpenGLCategory, "Textures (P1 - Wooden Container)");
 		testMenu.RegisterTest<LearnOpenGL::TexturesP2_TextureUnits>(learnOpenGLCategory, "Textures (P2 - Texture Units)");
+		testMenu.RegisterTest<LearnOpenGL::Transformations>(learnOpenGLCategory, "Transformations");
 	}
 
 	/* Loop until the user closes the window */

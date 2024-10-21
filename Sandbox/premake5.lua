@@ -13,14 +13,20 @@ project "Sandbox"
 		"%{prj.location}/Vendor/glad/src/**.c",
 		"%{prj.location}/Vendor/glad/include/**.h",
 		"%{prj.location}/Vendor/imgui/**.h",
-		"%{prj.location}/Vendor/imgui/**.cpp"
+		"%{prj.location}/Vendor/imgui/**.cpp",
+		"%{prj.location}/Vendor/glm/**.h",
+		"%{prj.location}/Vendor/glm/**.hpp",
+		"%{prj.location}/Vendor/glm/**.inl",
+		"%{prj.location}/Vendor/glm/**.cpp",
+		"%{prj.location}/Vendor/glm/**.cppm"
 	}
 	
 	includedirs {
 		"%{wks.location}/AtGfx/Include",
 		"%{prj.location}/Vendor/glfw/include",
 		"%{prj.location}/Vendor/glad/include",
-		"%{prj.location}/Vendor/imgui"
+		"%{prj.location}/Vendor/imgui",
+		"%{prj.location}/Vendor/glm"
     }
 
 	links {
