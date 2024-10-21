@@ -53,6 +53,7 @@ void main()
 		delete m_IndexBuffer;
 		delete m_VertexBuffer;
 		delete m_Pipeline;
+		delete m_Shader;
 	}
 
 	void HelloTriangleP2_IBO::Perform(float glfwTime)
