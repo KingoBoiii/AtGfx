@@ -1,5 +1,5 @@
 #pragma once
-#include "../Tests/ClearColorTest.h"
+#include "../../Tests/ClearColorTest.h"
 
 namespace LearnOpenGL
 {

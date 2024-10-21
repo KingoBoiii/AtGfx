@@ -12,11 +12,11 @@
 
 #include "Test/TestMenu.h"
 #include "Test/Tests/ClearColorTest.h"
-#include "Test/LearnOpenGL/HelloWindowTest.h"
-#include "Test/LearnOpenGL/HelloTriangleP1_VBO.h"
-#include "Test/LearnOpenGL/HelloTriangleP2_IBO.h"
-#include "Test/LearnOpenGL/ShadersP1_Uniforms.h"
-#include "Test/LearnOpenGL/ShadersP2_MoreAttributes.h"
+#include "Test/LearnOpenGL/GettingStarted/HelloWindowTest.h"
+#include "Test/LearnOpenGL/GettingStarted/HelloTriangleP1_VBO.h"
+#include "Test/LearnOpenGL/GettingStarted/HelloTriangleP2_IBO.h"
+#include "Test/LearnOpenGL/GettingStarted/ShadersP1_Uniforms.h"
+#include "Test/LearnOpenGL/GettingStarted/ShadersP2_MoreAttributes.h"
 
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
