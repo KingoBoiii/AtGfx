@@ -70,6 +70,8 @@ namespace AtGfx
 
 		KE_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "AtGfx requires at least OpenGL version 4.5!");
 #endif
+
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	void OpenGLGraphicsDevice::Deinitialize()
@@ -79,7 +81,7 @@ namespace AtGfx
 	void OpenGLGraphicsDevice::Clear(float r, float g, float b, float a) const
 	{
 		glClearColor(r, g, b, a);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void OpenGLGraphicsDevice::Draw(Pipeline* pipeline, Buffer* vertexBuffer, uint32_t vertexCount) const
