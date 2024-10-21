@@ -28,7 +28,7 @@ void main()
 
 		m_Pipeline = AtGfx::Pipeline::Create(m_GraphicsDevice, {
 			.VertexAttributeLayout = {
-				{ AtGfx::ShaderDataType::Float3, "POSITION" }
+				{ AtGfx::ShaderDataType::Float3, "aPos" }
 			}
 		});
 
