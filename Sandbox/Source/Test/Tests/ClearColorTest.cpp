@@ -18,7 +18,7 @@ namespace Tests
 	{
 	}
 
-	void ClearColorTest::Perform()
+	void ClearColorTest::Perform(float glfwTime)
 	{
 		m_GraphicsDevice->Clear(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2]);
 	}

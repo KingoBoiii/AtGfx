@@ -55,7 +55,7 @@ void main()
 		delete m_Pipeline;
 	}
 
-	void HelloTriangleP2_IBO::Perform()
+	void HelloTriangleP2_IBO::Perform(float glfwTime)
 	{
 		Clear();
 

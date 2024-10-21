@@ -16,7 +16,7 @@ namespace LearnOpenGL
 	public:
 		virtual void Initialize() override;
 		virtual void Deinitialize() override;
-		virtual void Perform() override;
+		virtual void Perform(float glfwTime) override;
 	private:
 		AtGfx::Shader* m_Shader = nullptr;
 		AtGfx::Pipeline* m_Pipeline = nullptr;

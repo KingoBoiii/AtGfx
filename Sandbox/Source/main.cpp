@@ -15,6 +15,7 @@
 #include "Test/LearnOpenGL/HelloWindowTest.h"
 #include "Test/LearnOpenGL/HelloTriangleP1_VBO.h"
 #include "Test/LearnOpenGL/HelloTriangleP2_IBO.h"
+#include "Test/LearnOpenGL/ShadersP1_Uniforms.h"
 
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
@@ -69,6 +70,7 @@ int main(void)
 		testMenu.RegisterTest<LearnOpenGL::HelloWindowTest>(learnOpenGLCategory, "Hello Window (Clear Color)");
 		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP1_VBO>(learnOpenGLCategory, "Hello Triangle (P1 - VBO)");
 		testMenu.RegisterTest<LearnOpenGL::HelloTriangleP2_IBO>(learnOpenGLCategory, "Hello Triangle (P2 - IBO/EBO)");
+		testMenu.RegisterTest<LearnOpenGL::ShadersP1_Uniforms>(learnOpenGLCategory, "Shaders (P1 - Uniforms)");
 	}
 
 	/* Loop until the user closes the window */
@@ -80,7 +82,7 @@ int main(void)
 
 		if (currentTest)
 		{
-			currentTest->Perform();
+			currentTest->Perform((float)glfwGetTime());
 		}
 
 		ImGui_ImplOpenGL3_NewFrame();

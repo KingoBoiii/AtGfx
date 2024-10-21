@@ -47,7 +47,7 @@ void main()
 		delete m_Pipeline;
 	}
 
-	void HelloTriangleP1_VBO::Perform()
+	void HelloTriangleP1_VBO::Perform(float glfwTime)
 	{
 		Clear();
 

@@ -8,11 +8,11 @@
 namespace LearnOpenGL
 {
 
-	class HelloTriangleP2_IBO : public LearnOpenGLTest
+	class ShadersP1_Uniforms : public LearnOpenGLTest
 	{
 	public:
-		HelloTriangleP2_IBO(AtGfx::GraphicsDevice* graphicsDevice);
-		virtual ~HelloTriangleP2_IBO() = default;
+		ShadersP1_Uniforms(AtGfx::GraphicsDevice* graphicsDevice);
+		virtual ~ShadersP1_Uniforms() = default;
 	public:
 		virtual void Initialize() override;
 		virtual void Deinitialize() override;
