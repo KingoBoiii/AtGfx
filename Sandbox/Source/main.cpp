@@ -20,6 +20,9 @@
 #include "Test/LearnOpenGL/GettingStarted/TexturesP1_Container.h"
 #include "Test/LearnOpenGL/GettingStarted/TexturesP2_TextureUnits.h"
 #include "Test/LearnOpenGL/GettingStarted/Transformations.h"
+#include "Test/LearnOpenGL/GettingStarted/CoordinateSystemsP1_Going3D.h"
+#include "Test/LearnOpenGL/GettingStarted/CoordinateSystemsP2_More3D.h"
+#include "Test/LearnOpenGL/GettingStarted/CoordinateSystemsP3_MoreCubes.h"
 
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
@@ -83,6 +86,9 @@ int main(void)
 		testMenu.RegisterTest<LearnOpenGL::TexturesP1_Container>(learnOpenGLCategory, "Textures (P1 - Wooden Container)");
 		testMenu.RegisterTest<LearnOpenGL::TexturesP2_TextureUnits>(learnOpenGLCategory, "Textures (P2 - Texture Units)");
 		testMenu.RegisterTest<LearnOpenGL::Transformations>(learnOpenGLCategory, "Transformations");
+		testMenu.RegisterTest<LearnOpenGL::CoordinateSystemsP1_Going3D>(learnOpenGLCategory, "CoordinateSystems (P1 - Going 3D)");
+		testMenu.RegisterTest<LearnOpenGL::CoordinateSystemsP2_More3D>(learnOpenGLCategory, "CoordinateSystems (P2 - More 3D)");
+		testMenu.RegisterTest<LearnOpenGL::CoordinateSystemsP3_MoreCubes>(learnOpenGLCategory, "CoordinateSystems (P3 - More Cubes)");
 	}
 
 	/* Loop until the user closes the window */
