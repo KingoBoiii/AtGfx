@@ -1,14 +1,14 @@
-#include "HelloTriangleP2.h"
+#include "HelloTriangleP1_VBO.h"
 
 namespace LearnOpenGL
 {
 
-	HelloTriangleP2::HelloTriangleP2(AtGfx::GraphicsDevice* graphicsDevice)
+	HelloTriangleP1::HelloTriangleP1(AtGfx::GraphicsDevice* graphicsDevice)
 		: LearnOpenGLTest(graphicsDevice)
 	{
 	}
 
-	void HelloTriangleP2::Initialize()
+	void HelloTriangleP1::Initialize()
 	{
 		const char* vertexShaderSource = R"(#version 330 core
 layout (location=0) in vec3 aPos;
@@ -27,40 +27,32 @@ void main()
 		m_Shader = AtGfx::Shader::Create(m_GraphicsDevice, vertexShaderSource, fragmentShaderSource, "HelloTriangle");
 
 		m_Pipeline = AtGfx::Pipeline::Create(m_GraphicsDevice, {
-			.VertexAttributeLayout = {
-				{ AtGfx::ShaderDataType::Float3, "POSITION" }
-			}
+		    .VertexAttributeLayout = {
+		        { AtGfx::ShaderDataType::Float3, "POSITION" }
+		    }
 		});
 
 		float vertices[] = {
-			 0.5f,  0.5f, 0.0f,  // top right
-			 0.5f, -0.5f, 0.0f,  // bottom right
-			-0.5f, -0.5f, 0.0f,  // bottom left
-			-0.5f,  0.5f, 0.0f   // top left 
-		};
-
-		unsigned int indices[] = {  // note that we start from 0!
-			0, 1, 3,   // first triangle
-			1, 2, 3    // second triangle
+		    -0.5f, -0.5f, 0.0f,
+		     0.5f, -0.5f, 0.0f,
+		     0.0f,  0.5f, 0.0f
 		};
 
 		m_VertexBuffer = AtGfx::Buffer::Create(m_GraphicsDevice, AtGfx::BufferSpecification::CreateVertexBufferSpecification(sizeof(vertices), AtGfx::BufferUsage::StaticDraw, vertices));
-		m_IndexBuffer = AtGfx::Buffer::Create(m_GraphicsDevice, AtGfx::BufferSpecification::CreateIndexBufferSpecification(sizeof(indices), AtGfx::BufferUsage::StaticDraw, indices));
 	}
 
-	void HelloTriangleP2::Deinitialize()
+	void HelloTriangleP1::Deinitialize()
 	{
-		delete m_IndexBuffer;
 		delete m_VertexBuffer;
 		delete m_Pipeline;
 	}
 
-	void HelloTriangleP2::Perform()
+	void HelloTriangleP1::Perform()
 	{
 		Clear();
 
 		m_Shader->Bind();
-		m_GraphicsDevice->DrawIndexed(m_Pipeline, m_VertexBuffer, m_IndexBuffer);
+		m_GraphicsDevice->Draw(m_Pipeline, m_VertexBuffer);
 	}
 
 }

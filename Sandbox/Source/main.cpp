@@ -13,8 +13,8 @@
 #include "Test/TestMenu.h"
 #include "Test/Tests/ClearColorTest.h"
 #include "Test/LearnOpenGL/HelloWindowTest.h"
-#include "Test/LearnOpenGL/HelloTriangleP1.h"
-#include "Test/LearnOpenGL/HelloTriangleP2.h"
+#include "Test/LearnOpenGL/HelloTriangleP1_VBO.h"
+#include "Test/LearnOpenGL/HelloTriangleP2_IBO.h"
 
 void AtGfxMessageCallback(AtGfx::MessageSeverity severity, const char* message)
 {
