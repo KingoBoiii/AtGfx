@@ -1,4 +1,5 @@
 #pragma once
+#include "Test/Abstractions/GraphicsShaderTest.h"
 #include "LearnOpenGLTest.h"
 
 #include <AtGfx/Shader.h>
@@ -8,18 +9,38 @@
 namespace LearnOpenGL
 {
 
-	class ShadersP1_Uniforms : public LearnOpenGLTest
+	class ShadersP1_Uniforms : public GraphicsShaderTest
 	{
 	public:
 		ShadersP1_Uniforms(AtGfx::GraphicsDevice* graphicsDevice);
-		virtual ~ShadersP1_Uniforms() = default;
 	public:
 		virtual void Initialize() override;
 		virtual void Deinitialize() override;
 		virtual void Perform(float glfwTime) override;
+	protected:
+		virtual const char* GetVertexSource() const override
+		{
+			return R"(#version 330 core
+layout (location = 0) in vec3 aPos;
+
+void main()
+{
+    gl_Position = vec4(aPos, 1.0);
+})";
+		}
+		virtual const char* GetFragmentSource() const override
+		{
+			return R"(#version 330 core
+out vec4 FragColor;
+  
+uniform vec4 ourColor; // we set this variable in the OpenGL code.
+
+void main()
+{
+    FragColor = ourColor;
+})";
+		}
 	private:
-		AtGfx::Shader* m_Shader = nullptr;
-		AtGfx::Pipeline* m_Pipeline = nullptr;
 		AtGfx::Buffer* m_VertexBuffer = nullptr;
 	};
 

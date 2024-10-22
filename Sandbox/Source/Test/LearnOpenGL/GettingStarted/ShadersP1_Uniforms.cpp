@@ -4,37 +4,13 @@ namespace LearnOpenGL
 {
 
 	ShadersP1_Uniforms::ShadersP1_Uniforms(AtGfx::GraphicsDevice* graphicsDevice)
-		: LearnOpenGLTest(graphicsDevice)
+		: GraphicsShaderTest(graphicsDevice, "Shaders-P1")
 	{
 	}
 
 	void ShadersP1_Uniforms::Initialize()
 	{
-		const char* vertexShaderSource = R"(#version 330 core
-layout (location = 0) in vec3 aPos;
-
-void main()
-{
-    gl_Position = vec4(aPos, 1.0);
-})";
-
-		const char* fragmentShaderSource = R"(#version 330 core
-out vec4 FragColor;
-  
-uniform vec4 ourColor; // we set this variable in the OpenGL code.
-
-void main()
-{
-    FragColor = ourColor;
-})";
-
-		m_Shader = AtGfx::Shader::Create(m_GraphicsDevice, vertexShaderSource, fragmentShaderSource, "Shaders");
-
-		m_Pipeline = AtGfx::Pipeline::Create(m_GraphicsDevice, {
-			.VertexAttributeLayout = {
-				{ AtGfx::ShaderDataType::Float3, "aPos" }
-			}
-		});
+		GraphicsShaderTest::Initialize();
 
 		float vertices[] = {
 			-0.5f, -0.5f, 0.0f,
@@ -47,9 +23,9 @@ void main()
 
 	void ShadersP1_Uniforms::Deinitialize()
 	{
+		GraphicsShaderTest::Deinitialize();
+
 		delete m_VertexBuffer;
-		delete m_Pipeline;
-		delete m_Shader;
 	}
 
 	void ShadersP1_Uniforms::Perform(float glfwTime)
