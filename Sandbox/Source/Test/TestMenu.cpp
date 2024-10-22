@@ -9,7 +9,9 @@ TestMenu::TestMenu(AtGfx::GraphicsDevice* graphicsDevice, Test*& currentTest)
 
 void TestMenu::ImGuiRender()
 {
-	if (ImGui::Begin("Tests"))
+	const ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize;
+
+	if (ImGui::Begin("Tests", nullptr, windowFlags))
 	{
 		for (const auto& [category, testRegistrations] : m_Tests)
 		{
@@ -71,7 +73,7 @@ void TestMenu::ImGuiRender()
 
 	if (m_CurrentTest != nullptr)
 	{
-		if (ImGui::Begin("Test..."))
+		if (ImGui::Begin("Test...", nullptr, windowFlags))
 		{
 			m_CurrentTest->ImGuiRender();
 		}
