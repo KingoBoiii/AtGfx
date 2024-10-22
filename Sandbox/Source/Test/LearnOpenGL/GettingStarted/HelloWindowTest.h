@@ -1,14 +1,13 @@
 #pragma once
-#include "../../Tests/ClearColorTest.h"
+#include "Test/Abstractions/GraphicsClearColorTest.h"
 
 namespace LearnOpenGL
 {
 
-	class HelloWindowTest : public Tests::ClearColorTest
+	class HelloWindowTest : public GraphicsClearColorTest
 	{
 	public:
 		HelloWindowTest(AtGfx::GraphicsDevice* graphicsDevice);
-		virtual ~HelloWindowTest() = default;
 	};
 
 }

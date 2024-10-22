@@ -6,15 +6,7 @@ namespace Tests
 {
 
 	ClearColorTest::ClearColorTest(AtGfx::GraphicsDevice* graphicsDevice)
-		: Test(graphicsDevice)
-	{
-	}
-
-	void ClearColorTest::Initialize()
-	{
-	}
-
-	void ClearColorTest::Deinitialize()
+		: GraphicsClearColorTest(graphicsDevice, new float[4] { 1.0f, 1.0f, 1.0f, 1.0f })
 	{
 	}
 
