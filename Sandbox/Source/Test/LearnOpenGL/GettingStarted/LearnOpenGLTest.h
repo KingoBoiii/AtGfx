@@ -12,6 +12,8 @@ namespace LearnOpenGL
 		{
 		}
 		virtual ~LearnOpenGLTest() = default;
+	public:
+		virtual void Initialize() override;
 	protected:
 		void Clear() const;
 	protected:
