@@ -1,5 +1,5 @@
 #pragma once
-#include "LearnOpenGLTest.h"
+#include "Test/Abstractions/GraphicsShaderTest.h"
 
 #include <AtGfx/Shader.h>
 #include <AtGfx/Pipeline.h>
@@ -9,7 +9,7 @@
 namespace LearnOpenGL
 {
 
-	class TexturesP1_Container : public LearnOpenGLTest
+	class TexturesP1_Container : public GraphicsShaderTest
 	{
 	public:
 		TexturesP1_Container(AtGfx::GraphicsDevice* graphicsDevice);
@@ -18,9 +18,11 @@ namespace LearnOpenGL
 		virtual void Initialize() override;
 		virtual void Deinitialize() override;
 		virtual void Perform(float glfwTime) override;
+	protected:
+		virtual const char* GetVertexSource() const override;
+		virtual const char* GetFragmentSource() const override;
+		virtual AtGfx::VertexAttributeLayout GetVertexAttributeLayout() const override;
 	private:
-		AtGfx::Shader* m_Shader = nullptr;
-		AtGfx::Pipeline* m_Pipeline = nullptr;
 		AtGfx::Buffer* m_VertexBuffer = nullptr;
 		AtGfx::Buffer* m_IndexBuffer = nullptr;
 		AtGfx::Texture* m_Texture = nullptr;

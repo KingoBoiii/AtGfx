@@ -32,11 +32,33 @@ namespace LearnOpenGL
 	{
 		Clear();
 
-
 		m_Shader->Bind(); 
 		float greenValue = sin(glfwTime) / 2.0f + 0.5f;
 		m_Shader->SetVec4("ourColor", 0.0f, greenValue, 0.0f, 1.0f);
 		m_GraphicsDevice->Draw(m_Pipeline, m_VertexBuffer);
+	}
+
+	const char* ShadersP1_Uniforms::GetVertexSource() const
+	{
+		return R"(#version 330 core
+layout (location = 0) in vec3 aPos;
+
+void main()
+{
+    gl_Position = vec4(aPos, 1.0);
+})";
+	}
+	const char* ShadersP1_Uniforms::GetFragmentSource() const
+	{
+		return R"(#version 330 core
+out vec4 FragColor;
+  
+uniform vec4 ourColor; // we set this variable in the OpenGL code.
+
+void main()
+{
+    FragColor = ourColor;
+})";
 	}
 
 }

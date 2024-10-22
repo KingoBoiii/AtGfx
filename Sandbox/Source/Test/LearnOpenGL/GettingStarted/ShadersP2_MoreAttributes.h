@@ -18,39 +18,9 @@ namespace LearnOpenGL
 		virtual void Deinitialize() override;
 		virtual void Perform(float glfwTime) override;
 	protected:
-		virtual const char* GetVertexSource() const override
-		{
-			return R"(#version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aColor;
-
-out vec3 ourColor;
-
-void main()
-{
-    gl_Position = vec4(aPos, 1.0);
-	ourColor = aColor;
-})";
-		}
-		virtual const char* GetFragmentSource() const override
-		{
-			return R"(#version 330 core
-out vec4 FragColor;
-  
-in vec3 ourColor;
-
-void main()
-{
-    FragColor = vec4(ourColor, 1.0);
-})";
-		}
-		virtual AtGfx::VertexAttributeLayout GetVertexAttributeLayout() const override
-		{
-			return {
-				{ AtGfx::ShaderDataType::Float3, "aPos" },
-				{ AtGfx::ShaderDataType::Float3, "aColor" }
-			};
-		}
+		virtual const char* GetVertexSource() const override;
+		virtual const char* GetFragmentSource() const override;
+		virtual AtGfx::VertexAttributeLayout GetVertexAttributeLayout() const override;
 	private:
 		AtGfx::Buffer* m_VertexBuffer = nullptr;
 	};

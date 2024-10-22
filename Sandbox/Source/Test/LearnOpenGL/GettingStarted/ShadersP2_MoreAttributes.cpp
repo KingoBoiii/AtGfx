@@ -37,4 +37,38 @@ namespace LearnOpenGL
 		m_GraphicsDevice->Draw(m_Pipeline, m_VertexBuffer);
 	}
 
+	const char* ShadersP2_MoreAttributes::GetVertexSource() const
+	{
+		return R"(#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aColor;
+
+out vec3 ourColor;
+
+void main()
+{
+    gl_Position = vec4(aPos, 1.0);
+	ourColor = aColor;
+})";
+	}
+	const char* ShadersP2_MoreAttributes::GetFragmentSource() const
+	{
+		return R"(#version 330 core
+out vec4 FragColor;
+  
+in vec3 ourColor;
+
+void main()
+{
+    FragColor = vec4(ourColor, 1.0);
+})";
+	}
+	AtGfx::VertexAttributeLayout ShadersP2_MoreAttributes::GetVertexAttributeLayout() const
+	{
+		return {
+			{ AtGfx::ShaderDataType::Float3, "aPos" },
+			{ AtGfx::ShaderDataType::Float3, "aColor" }
+		};
+	}
+
 }
