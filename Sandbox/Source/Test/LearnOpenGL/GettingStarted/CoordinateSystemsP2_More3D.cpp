@@ -8,50 +8,13 @@ namespace LearnOpenGL
 {
 
 	CoordinateSystemsP2_More3D::CoordinateSystemsP2_More3D(AtGfx::GraphicsDevice* graphicsDevice)
-		: LearnOpenGLTest(graphicsDevice)
+		: GraphicsShaderTest(graphicsDevice, "CoordinateSystems-P2")
 	{
 	}
 
 	void CoordinateSystemsP2_More3D::Initialize()
 	{
-		const char* vertexShaderSource = R"(#version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec2 aTexCoord;
-
-out vec2 TexCoord;
-  
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
-
-void main()
-{
-    gl_Position = projection * view * model * vec4(aPos, 1.0);
-    TexCoord = aTexCoord;
-})";
-
-		const char* fragmentShaderSource = R"(#version 330 core
-out vec4 FragColor;
-  
-in vec2 TexCoord;
-
-uniform sampler2D texture1;
-uniform sampler2D texture2;
-
-void main()
-{	
-	// linearly interpolate between both textures (80% container, 20% awesomeface)
-    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
-})";
-
-		m_Shader = AtGfx::Shader::Create(m_GraphicsDevice, vertexShaderSource, fragmentShaderSource, "Textures");
-
-		m_Pipeline = AtGfx::Pipeline::Create(m_GraphicsDevice, {
-			.VertexAttributeLayout = {
-				{ AtGfx::ShaderDataType::Float3, "aPos" },
-				{ AtGfx::ShaderDataType::Float2, "aTexCoord" }
-			}
-			});
+		GraphicsShaderTest::Initialize();
 
 		float vertices[] = {
 			-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -109,11 +72,11 @@ void main()
 
 	void CoordinateSystemsP2_More3D::Deinitialize()
 	{
+		GraphicsShaderTest::Deinitialize();
+
 		delete m_Texture1;
 		delete m_Texture2;
 		delete m_VertexBuffer;
-		delete m_Pipeline;
-		delete m_Shader;
 	}
 
 	void CoordinateSystemsP2_More3D::Perform(float glfwTime)
@@ -139,6 +102,50 @@ void main()
 		m_Shader->SetMat4("view", glm::value_ptr(view));
 		m_Shader->SetMat4("projection", glm::value_ptr(projection));
 		m_GraphicsDevice->Draw(m_Pipeline, m_VertexBuffer, 36);
+	}
+
+	const char* CoordinateSystemsP2_More3D::GetVertexSource() const
+	{
+		return R"(#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec2 aTexCoord;
+
+out vec2 TexCoord;
+  
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
+    TexCoord = aTexCoord;
+})";
+	}
+
+	const char* CoordinateSystemsP2_More3D::GetFragmentSource() const
+	{
+		return R"(#version 330 core
+out vec4 FragColor;
+  
+in vec2 TexCoord;
+
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+
+void main()
+{	
+	// linearly interpolate between both textures (80% container, 20% awesomeface)
+    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
+})";
+	}
+
+	AtGfx::VertexAttributeLayout CoordinateSystemsP2_More3D::GetVertexAttributeLayout() const
+	{
+		return {
+			{ AtGfx::ShaderDataType::Float3, "aPos" },
+			{ AtGfx::ShaderDataType::Float2, "aTexCoord" }
+		};
 	}
 
 }

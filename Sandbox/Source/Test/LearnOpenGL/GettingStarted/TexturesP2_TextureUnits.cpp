@@ -4,50 +4,13 @@ namespace LearnOpenGL
 {
 
 	TexturesP2_TextureUnits::TexturesP2_TextureUnits(AtGfx::GraphicsDevice* graphicsDevice)
-		: LearnOpenGLTest(graphicsDevice)
+		: GraphicsShaderTest(graphicsDevice, "Textures-P2")
 	{
 	}
 
 	void TexturesP2_TextureUnits::Initialize()
 	{
-		const char* vertexShaderSource = R"(#version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aColor;
-layout (location = 2) in vec2 aTexCoord;
-
-out vec3 ourColor;
-out vec2 TexCoord;
-
-void main()
-{
-    gl_Position = vec4(aPos, 1.0);
-    ourColor = aColor;
-    TexCoord = aTexCoord;
-})";
-
-		const char* fragmentShaderSource = R"(#version 330 core
-out vec4 FragColor;
-  
-in vec3 ourColor;
-in vec2 TexCoord;
-
-uniform sampler2D texture1;
-uniform sampler2D texture2;
-
-void main()
-{
-    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
-})";
-
-		m_Shader = AtGfx::Shader::Create(m_GraphicsDevice, vertexShaderSource, fragmentShaderSource, "Textures");
-
-		m_Pipeline = AtGfx::Pipeline::Create(m_GraphicsDevice, {
-			.VertexAttributeLayout = {
-				{ AtGfx::ShaderDataType::Float3, "aPos" },
-				{ AtGfx::ShaderDataType::Float3, "aColor" },
-				{ AtGfx::ShaderDataType::Float2, "aTexCoord" }
-			}
-			});
+		GraphicsShaderTest::Initialize();
 
 		float vertices[] = {
 			// positions          // colors           // texture coords
@@ -75,11 +38,11 @@ void main()
 
 	void TexturesP2_TextureUnits::Deinitialize()
 	{
+		GraphicsShaderTest::Deinitialize();
+
 		delete m_Texture1;
 		delete m_Texture2;
 		delete m_VertexBuffer;
-		delete m_Pipeline;
-		delete m_Shader;
 	}
 
 	void TexturesP2_TextureUnits::Perform(float glfwTime)
@@ -90,6 +53,50 @@ void main()
 		m_Texture2->Bind(1);
 		m_Shader->Bind();
 		m_GraphicsDevice->DrawIndexed(m_Pipeline, m_VertexBuffer, m_IndexBuffer);
+	}
+
+	const char* TexturesP2_TextureUnits::GetVertexSource() const
+	{
+		return R"(#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aColor;
+layout (location = 2) in vec2 aTexCoord;
+
+out vec3 ourColor;
+out vec2 TexCoord;
+
+void main()
+{
+    gl_Position = vec4(aPos, 1.0);
+    ourColor = aColor;
+    TexCoord = aTexCoord;
+})";
+	}
+
+	const char* TexturesP2_TextureUnits::GetFragmentSource() const
+	{
+		return R"(#version 330 core
+out vec4 FragColor;
+  
+in vec3 ourColor;
+in vec2 TexCoord;
+
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+
+void main()
+{
+    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
+})";
+	}
+
+	AtGfx::VertexAttributeLayout TexturesP2_TextureUnits::GetVertexAttributeLayout() const
+	{
+		return {
+			{ AtGfx::ShaderDataType::Float3, "aPos" },
+			{ AtGfx::ShaderDataType::Float3, "aColor" },
+			{ AtGfx::ShaderDataType::Float2, "aTexCoord" }
+		};
 	}
 
 }

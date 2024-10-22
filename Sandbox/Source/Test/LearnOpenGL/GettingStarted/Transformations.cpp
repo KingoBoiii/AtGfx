@@ -8,48 +8,13 @@ namespace LearnOpenGL
 {
 
 	Transformations::Transformations(AtGfx::GraphicsDevice* graphicsDevice)
-		: LearnOpenGLTest(graphicsDevice)
+		: GraphicsShaderTest(graphicsDevice, "Transformations")
 	{
 	}
 
 	void Transformations::Initialize()
 	{
-		const char* vertexShaderSource = R"(#version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 2) in vec2 aTexCoord;
-
-out vec2 TexCoord;
-  
-uniform mat4 transform;
-
-void main()
-{
-    gl_Position = transform * vec4(aPos, 1.0f);
-    TexCoord = vec2(aTexCoord.x, aTexCoord.y);
-})";
-
-		const char* fragmentShaderSource = R"(#version 330 core
-out vec4 FragColor;
-  
-in vec2 TexCoord;
-
-uniform sampler2D texture1;
-uniform sampler2D texture2;
-
-void main()
-{
-    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
-})";
-
-		m_Shader = AtGfx::Shader::Create(m_GraphicsDevice, vertexShaderSource, fragmentShaderSource, "Textures");
-
-		m_Pipeline = AtGfx::Pipeline::Create(m_GraphicsDevice, {
-			.VertexAttributeLayout = {
-				{ AtGfx::ShaderDataType::Float3, "aPos" },
-				{ AtGfx::ShaderDataType::Float3, "aColor" },
-				{ AtGfx::ShaderDataType::Float2, "aTexCoord" }
-			}
-			});
+		GraphicsShaderTest::Initialize();
 
 		float vertices[] = {
 			// positions          // colors           // texture coords
@@ -77,11 +42,11 @@ void main()
 
 	void Transformations::Deinitialize()
 	{
+		GraphicsShaderTest::Deinitialize();
+
 		delete m_Texture1;
 		delete m_Texture2;
 		delete m_VertexBuffer;
-		delete m_Pipeline;
-		delete m_Shader;
 	}
 
 	void Transformations::Perform(float glfwTime)
@@ -98,6 +63,48 @@ void main()
 		m_Shader->Bind();
 		m_Shader->SetMat4("transform", glm::value_ptr(trans));
 		m_GraphicsDevice->DrawIndexed(m_Pipeline, m_VertexBuffer, m_IndexBuffer);
+	}
+
+	const char* Transformations::GetVertexSource() const
+	{
+		return R"(#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 2) in vec2 aTexCoord;
+
+out vec2 TexCoord;
+  
+uniform mat4 transform;
+
+void main()
+{
+    gl_Position = transform * vec4(aPos, 1.0f);
+    TexCoord = vec2(aTexCoord.x, aTexCoord.y);
+})";
+	}
+
+	const char* Transformations::GetFragmentSource() const
+	{
+		return R"(#version 330 core
+out vec4 FragColor;
+  
+in vec2 TexCoord;
+
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+
+void main()
+{
+    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
+})";
+	}
+
+	AtGfx::VertexAttributeLayout Transformations::GetVertexAttributeLayout() const
+	{
+		return {
+			{ AtGfx::ShaderDataType::Float3, "aPos" },
+			{ AtGfx::ShaderDataType::Float3, "aColor" },
+			{ AtGfx::ShaderDataType::Float2, "aTexCoord" }
+		};
 	}
 
 }
