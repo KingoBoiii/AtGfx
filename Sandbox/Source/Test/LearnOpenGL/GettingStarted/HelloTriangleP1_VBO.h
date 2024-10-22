@@ -1,8 +1,6 @@
 #pragma once
 #include "Test/Abstractions/GraphicsShaderTest.h"
 
-#include <AtGfx/Shader.h>
-#include <AtGfx/Pipeline.h>
 #include <AtGfx/Buffer.h>
 
 namespace LearnOpenGL

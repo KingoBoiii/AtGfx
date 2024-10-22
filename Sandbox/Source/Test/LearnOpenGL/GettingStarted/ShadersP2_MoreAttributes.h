@@ -2,8 +2,6 @@
 #include "Test/Abstractions/GraphicsShaderTest.h"
 #include "LearnOpenGLTest.h"
 
-#include <AtGfx/Shader.h>
-#include <AtGfx/Pipeline.h>
 #include <AtGfx/Buffer.h>
 
 namespace LearnOpenGL
