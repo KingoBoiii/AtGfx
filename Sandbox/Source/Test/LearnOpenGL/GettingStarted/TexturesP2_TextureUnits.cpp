@@ -43,6 +43,7 @@ namespace LearnOpenGL
 		delete m_Texture1;
 		delete m_Texture2;
 		delete m_VertexBuffer;
+		delete m_IndexBuffer;
 	}
 
 	void TexturesP2_TextureUnits::Perform(float glfwTime)

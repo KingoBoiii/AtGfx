@@ -47,6 +47,7 @@ namespace LearnOpenGL
 		delete m_Texture1;
 		delete m_Texture2;
 		delete m_VertexBuffer;
+		delete m_IndexBuffer;
 	}
 
 	void CoordinateSystemsP1_Going3D::Perform(float glfwTime)
