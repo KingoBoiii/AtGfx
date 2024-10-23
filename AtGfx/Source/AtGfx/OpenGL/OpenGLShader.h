@@ -10,6 +10,7 @@ namespace AtGfx
 	class OpenGLShader : public Shader
 	{
 	public:
+		OpenGLShader(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath, const std::string& name);
 		OpenGLShader(GraphicsDevice* graphicsDevice, const std::string& filepath);
 		OpenGLShader(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name);
 		OpenGLShader(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name);

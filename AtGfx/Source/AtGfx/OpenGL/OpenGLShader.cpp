@@ -7,20 +7,13 @@ namespace AtGfx
 
 	AT_GFX_EXTERN_DEBUG_MESSAGE_CALLBACK;
 
-	OpenGLShader::OpenGLShader(GraphicsDevice* graphicsDevice, const std::string& filepath)
-		: Shader(graphicsDevice, filepath)
-	{
-		CreateShaderProgram();
-	}
-
-	OpenGLShader::OpenGLShader(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name)
+	OpenGLShader::OpenGLShader(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath, const std::string& name)
 		: Shader(graphicsDevice, filepath, name)
 	{
-		CreateShaderProgram();
 	}
 
 	OpenGLShader::OpenGLShader(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name)
-		: Shader(graphicsDevice, vertexShaderSource, fragmentShaderSource, name)
+		: Shader(graphicsDevice, "", name)
 	{
 		m_VertexSource = vertexShaderSource;
 		m_FragmentSource = fragmentShaderSource;
@@ -30,6 +23,8 @@ namespace AtGfx
 
 	OpenGLShader::~OpenGLShader()
 	{
+		m_UniformLocations.clear();
+
 		DeleteShaderProgram();
 	}
 
@@ -119,6 +114,9 @@ namespace AtGfx
 			// Write the error to a log
 			AT_GFX_ERROR("PROGRAM_LINKING\n{}", message);
 		}
+
+		glDeleteShader(vertexShader); 
+		glDeleteShader(fragmentShader);
 
 		return program;
 	}

@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <filesystem>
 
 namespace AtGfx
 {
@@ -11,8 +12,9 @@ namespace AtGfx
 	class Shader : public Internal::Bindable
 	{
 	public:
-		static Shader* Create(GraphicsDevice* graphicsDevice, const std::string& filepath);
-		static Shader* Create(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name);
+		static Shader* Create(GraphicsDevice* graphicsDevice, const std::string& name);
+		static Shader* Create(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath);
+		static Shader* Create(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath, const std::string& name);
 		static Shader* Create(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name);
 	public:
 		virtual ~Shader() = default;
@@ -21,18 +23,15 @@ namespace AtGfx
 		virtual void SetVec4(const std::string& name, float v0, float v1, float v2, float v3) const = 0;
 		virtual void SetMat4(const std::string& name, const float* matrix) const = 0;
 	protected:
-		Shader(GraphicsDevice* graphicsDevice, const std::string& filepath);
-		Shader(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name);
-		Shader(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name);
+		Shader(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath, const std::string& name);
 	protected:
-		std::string ReadFile(const std::string& filepath);
+		std::string ReadFile(const std::filesystem::path& filepath);
 		std::vector<std::string> GetLines(const std::string& source);
 		void PreProcess(const std::string& source, std::string** shaders);
-		std::string GetNameByFilepath(const std::string& filepath);
 	protected:
 		GraphicsDevice* m_GraphicsDevice = nullptr;
 		std::string m_Name;
-		std::string m_FilePath;
+		std::filesystem::path m_FilePath;
 	private:
 		enum class ShaderType
 		{

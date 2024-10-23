@@ -5,23 +5,29 @@
 namespace AtGfx
 {
 
-	Shader* Shader::Create(GraphicsDevice* graphicsDevice, const std::string& filepath)
+	namespace Utils
 	{
-		switch (graphicsDevice->GetGraphicsAPI())
+
+		static std::string GetNameByFilepath(const std::filesystem::path& filepath)
 		{
-			case AtGfx::GraphicsAPI::OpenGL:		return new OpenGLShader(graphicsDevice, filepath);
-			case AtGfx::GraphicsAPI::Vulkan:
-			case AtGfx::GraphicsAPI::DirectX11:
-			case AtGfx::GraphicsAPI::DirectX12:
-			case AtGfx::GraphicsAPI::None:
-			default:
-				break;
+			std::string filepathStr = filepath.string();
+
+			size_t found = filepathStr.find_last_of("/\\");
+			std::string filename = found != std::string::npos ? filepathStr.substr(found + 1) : filepathStr;
+			found = filename.find_first_of(".");
+			filename = found != std::string::npos ? filename.substr(0, found) : filepathStr;
+
+			return filename;
 		}
 
-		return nullptr;
 	}
 
-	Shader* Shader::Create(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name)
+	Shader* Shader::Create(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath)
+	{
+		return Create(graphicsDevice, filepath, Utils::GetNameByFilepath(filepath));
+	}
+
+	Shader* Shader::Create(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath, const std::string& name)
 	{
 		switch (graphicsDevice->GetGraphicsAPI())
 		{
@@ -53,25 +59,14 @@ namespace AtGfx
 		return nullptr;
 	}
 
-	Shader::Shader(GraphicsDevice* graphicsDevice, const std::string& filepath)
-		: m_GraphicsDevice(graphicsDevice), m_FilePath(filepath)
-	{
-		m_Name = GetNameByFilepath(filepath);
-	}
-
-	Shader::Shader(GraphicsDevice* graphicsDevice, const std::string& filepath, const std::string& name)
+	Shader::Shader(GraphicsDevice* graphicsDevice, const std::filesystem::path& filepath, const std::string& name)
 		: m_GraphicsDevice(graphicsDevice), m_FilePath(filepath), m_Name(name)
 	{
 	}
 
-	Shader::Shader(GraphicsDevice* graphicsDevice, const char* vertexShaderSource, const char* fragmentShaderSource, const std::string& name)
-		: m_GraphicsDevice(graphicsDevice), m_Name(name)
+	std::string Shader::ReadFile(const std::filesystem::path& filepath)
 	{
-	}
-
-	std::string Shader::ReadFile(const std::string& filepath)
-	{
-		FILE* file = fopen(filepath.c_str(), "r");
+		FILE* file = fopen(filepath.string().c_str(), "r");
 		if (file == nullptr)
 		{
 			// error file not found
@@ -139,18 +134,6 @@ namespace AtGfx
 				shaders[(int32_t)type]->append("\n");
 			}
 		}
-	}
-
-	std::string Shader::GetNameByFilepath(const std::string& filepath)
-	{
-		std::string filename;
-
-		size_t found = filepath.find_last_of("/\\");
-		filename = found != std::string::npos ? filepath.substr(found + 1) : filepath;
-		found = filename.find_first_of(".");
-		filename = found != std::string::npos ? filename.substr(0, found) : filepath;
-
-		return filename;
 	}
 
 }
